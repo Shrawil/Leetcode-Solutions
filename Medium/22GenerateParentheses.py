@@ -1,11 +1,17 @@
+def explore(path, ob, cb, n, res):
+    if len(path) == n * 2:
+        res.append(path)
+        return 
+    if ob < n:
+        explore(path + "(", ob+1, cb, n, res)
+    if cb < ob:
+        explore(path + ")", ob, cb+1, n, res)
+
 class Solution(object):
     def generateParenthesis(self, n):
-        ob = "(" * n
-        cb = ")" * n
-        braces = ob + cb
-        for i in range(n):
-            for j in range(n):
-                print(braces[i], braces[j])
-
+        res = []
+        explore("", 0, 0, n, res)
+        return res
+    
 a = Solution()
 print(a.generateParenthesis(3))
